@@ -1,0 +1,103 @@
+
+/*:
+Describles the look of the HTML tags
+
+syntax: selectors { declaration1; declaration2 }
+declaration sytax: property_name: value
+not whitespace sensitive
+
+HTML intergration:
+    - inline (using the style attribute)
+    - head (<style> tag)
+    - refering by a <link>
+
+HTML code is read my the browser
+    - top-down
+    - inharitance (outter-to-inner)
+    - tag < class < id
+
+SELECTORS:
+    single selectors:
+        - html_name: all HTML which has the given name
+        - .class_name: selects all the tag with the given class name
+        - #id: selects the tag with the given id
+    specifying the selection:
+        - space: specify the parent /any level/
+        - > specify the just upper parent
+    multiple selector:
+        - comma separated
+
+
+ATTRIBUTES:
+    1) color (rgb, hex, named)
+        - color 
+        - background-color
+    2) border
+        - border-width: 1px, 2px,...
+        - border-style: solid, dashed, dotted, ...
+
+    3) HTML tag size:
+        I) dynamic
+            a) margin (px)
+                - margin-top
+                - margin-bottom
+                - margin-left
+                - margin-right
+            b) padding (px):
+                - padding-top
+                - padding-bottom
+                - padding-left
+                - padding-right
+        II) fix
+            a) height (px)
+            b width
+    4) text manipulations:
+        - text-align: center, left, right
+        - text-transform: capitalize, uppercase
+        - text-decoration-line: underline, overline, line-through
+        - font-family: serif, arial
+        - font-size: (px)
+    5) link manipulation, states of a link
+        - link > not visited
+        - visited > visited
+        - hover > mouse is over the link
+        - active > when we click on the link
+*/
+
+h1 {
+    color: white;
+    background-color: black;
+}
+
+h1:hover{
+    color: blue
+}
+
+.first-ul {
+    border-width: 1px;
+    border-style: dashed;
+}
+
+.capitalized{
+    text-transform: uppercase;
+    font-family: arial;
+}
+
+.overline {
+    text-decoration-line: line-through;
+    text-transform: lowercase;
+    color:gray;
+    font-size: 10px
+}
+
+a:visited{
+    color: red;
+}
+
+a:hover{
+    color: green;
+}
+
+ul#nested-first-ul > li:nth-child(2):hover {
+    font-size: 30px;
+}
