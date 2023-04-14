@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jackpot Calculator</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Results</h1>
+
+    <p>Your numbers: {{ numbers }}</p>
+    <p>Years to look back: {{ lookback_years }}</p>
+    <p>Total count: {{ total_count }}</p>
+
+    {% if years %}
+        <p>Your numbers appeared in the following years:</p>
+        <ul>
+        {% for year in years %}
+            <li>{{ year }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>

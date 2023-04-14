@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jackpot Calculator</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <form id="calculate-form" method="POST" action="/calculate" enctype="application/json">
+        <label for="numbers">Enter your numbers (separated by commas):</label>
+        <input type="text" id="numbers" name="numbers" required>
+
+        <label for="lookback_years">Select the number of years to look back:</label>
+        <input type="number" id="lookback_years" name="lookback_years" required min="1" max="10" value="1">
+
+        <button type="submit" onclick="calculateTotalValue(event)">Calculate</button>
+
+        <div id="total-value" style="display:none;">
+            <p>Total Count: <span id="total-count-span"></span></p>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        function calculateTotalValue(event) {
+            event.preventDefault();
+
+            var numbers = document.getElementById('numbers').value.trim();
+            var lookbackYears = document.getElementById('lookback_years').value.trim();
+
+            if (!numbers) {
+                alert('Please enter your numbers');
+                return;
+            }
+
+            if (!/^\d+(,\d+){4}$/.test(numbers)) {
+                alert('Please enter 5 comma-separated numbers');
+                return;
+            }
+
+            if (!lookbackYears) {
+                alert('Please select the number of years to look back');
+                return;
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/calculate');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+                console.log(xhr.responseText);    
+                if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        document.getElementById('total-count-span').innerHTML = response.total_count;
+                        document.getElementById('total-value').style.display = 'block';
+                } else {
+                    alert('Request failed. Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send(JSON.stringify({
+                numbers: numbers,
+                lookback_years: lookbackYears
+            }));
+        }
+    </script>
+</body>
+</html>
